@@ -5,7 +5,6 @@ namespace SharepointPhp\Result;
 abstract class AbstractResult  implements \Iterator 
 {
     private $position = 0;
-    
     protected $data;
     
     public function __construct(Array $result)
@@ -17,24 +16,28 @@ abstract class AbstractResult  implements \Iterator
     
     abstract function parseData($result);
     
-    function rewind() {
+    function rewind() 
+    {
         $this->position = 0;
     }
 
-    function current() {
+    function current() 
+    {
         return $this->data[$this->position];
     }
 
-    function key() {
+    function key() 
+    {
         return $this->position;
     }
 
-    function next() {
+    function next() 
+    {
         ++$this->position;
     }
 
-    function valid() {
+    function valid() 
+    {
         return isset($this->data[$this->position]);
-    }    
-    
+    }
 }

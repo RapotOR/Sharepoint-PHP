@@ -5,12 +5,14 @@ namespace SharepointPhp\Result;
 class ResultItem 
 {
     protected $data;
-    protected $prefix = '!ows_';
-    protected $separator = ';#';
+    protected $prefix;
+    protected $separator;
     
-    public function __construct($item)
+    public function __construct($item, $prefix = '!ows_', $separator = ';#')
     {
         $this->data = $item;
+        $this->prefix = $prefix;
+        $this->separator = $separator;
     }
     
     public function has($key)
@@ -28,14 +30,19 @@ class ResultItem
     
     public function keys()
     {
-        return array_keys($this->data);
+        return str_replace($this->prefix, '', array_keys($this->data));
     }
     
     public function __get($key)
     {
         if($this->has($key))
-            return $this->val( $this->data[ $this->prefix . $key ] );
+            return $this->val( $this->data[$this->prefix . $key] );
         
-        return false;
+        throw new \Exception( "Parameter " . $key . " does not exist. Parameters are : ". implode(',', $this->keys()), 0 );
+    }
+    
+    public function __call($name, $arguments = false)
+    {
+        return $this->__get($name);
     }
 }
