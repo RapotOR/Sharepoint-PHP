@@ -2,13 +2,19 @@ Description
 ===========
 Sharepoint PHP tool, PHP5.3
 
+Requirements
+============
+NuSoap library : http://sourceforge.net/projects/nusoap/ or into my repository https://github.com/RapotOR/nusoap .
+
 Available commands
 ==================
 Lists:
+
     - GetListItems
     - GetList
 
 Webs:
+
     - GetWebCollection
 
 Use it
